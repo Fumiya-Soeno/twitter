@@ -1,0 +1,31 @@
+$left-width: 225px;
+$main-color: rgba(0,0,0,1.0);
+$sub-color : rgba(255,255,255,.2);
+
+body{
+  margin: 0;
+  color: #FFF;
+  background: $main-color;
+}
+
+.wrapper{
+  width: 700px;
+  height: 100vh;
+  display: flex;
+  margin: 0 auto;
+  &-left{
+    width: $left-width;
+    border-right: 1px solid $sub-color;
+    &-content{
+      font-size: 20px;
+      &-icon{
+        width: 20px;
+        text-align: center;
+        display: inline-block;
+      }
+    }
+  }
+  &-right{
+    width: calc(100% - #{$left-width});
+  }
+}
