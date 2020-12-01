@@ -1,15 +1,22 @@
 <div class="wrapper">
-    <div class="wrapper-left">
-        <% @icons.each do |icon|%>
-            <div class="wrapper-left-content">
-                <span class="wrapper-left-content-icon">
-                    <i class="<%= icon[:class] %>"></i>
-                </span>
-                <span class="wrapper-left-content-text">
-                    <%= icon[:text] %>
-                </span>
-            </div>
+    <%= render '/layouts/sidebar', {icons: @icons}%>
+    <div class="wrapper-right">
+        <textarea placeholder="いまどうしてる？" class="tweet_input"></textarea>
+        <button class="tweet_submit">送信</button>
+        <% Tweet.all.each do |t| %>
+            <div class="tweet"><%=t[:text]%></div>
         <% end %>
     </div>
-    <div class="wrapper-right"></div>
 </div>
+
+<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+<script>
+    $(document).on('click', '.tweet_submit', ()=>{
+        $.get({
+            url: '/tweets/create',
+            data: {tweet: {text: $('.tweet_input').val()}}
+        }).done(()=>{
+            $('.tweet_input').val("")
+        })
+    })
+</script>
