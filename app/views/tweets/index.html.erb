@@ -1,0 +1,34 @@
+<div class="wrapper">
+    <%= render '/layouts/sidebar', {icons: @icons}%>
+    <div class="wrapper-right">
+        <div class="wrapper-right-top">
+            <span class="wrapper-right-top-text">ホーム</span>
+            <i class="wrapper-right-top-icon fas fa-lightbulb"></i>
+        </div>
+        <div class="wrapper-right-create">
+            <div class="wrapper-right-create-left">
+                <i class="fas fa-user"></i>
+            </div>
+            <div class="wrapper-right-create-right">
+                <div class="wrapper-right-create-right-top">
+                    <textarea placeholder="いまどうしてる？" class="tweet_input"></textarea>
+                </div>
+                <div class="wrapper-right-create-right-bottom">
+                    <div class="wrapper-right-create-right-bottom-left">
+                        <% ["image", "gift", "signal", "smile", "calendar-alt"].each do |c| %>
+                            <i class="fas fa-<%= c %>"></i>
+                        <% end %>
+                    </div>
+                    <div class="wrapper-right-create-right-bottom-right">
+                        <div class="tweet_submit">ツイートする</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="wrapper-right-tweets">
+            <% Tweet.all.order(created_at: :desc).each do |t| %>
+                <%= render '/layouts/tweet', {t: t} %>
+            <% end %>
+        </div>
+    </div>
+</div>
